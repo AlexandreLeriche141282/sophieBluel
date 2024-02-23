@@ -3,6 +3,7 @@ const btnSort = document.querySelectorAll(".btnSort")
 let photo = [];
 let filterMethod = "all"
 
+
 // -------------------------------------------------------
 // ******* Récupération des données ******** //
 async function getWorks() {
@@ -10,13 +11,13 @@ async function getWorks() {
         .then((res) => res.json())
         .then((data) => photo = data);
     console.log(photo);
-    displayPhoto()    
+    displayPhoto()
 }
 // -----------------------------------------------------------
 // ********** Affichage des photos avec filtres ************ //
 function displayPhoto() {
     photoSophie.innerHTML = photo
-    
+        
         .filter((a) => {
             if (filterMethod === "objets") {
                 return a.category.name.includes("Objets");
@@ -26,10 +27,10 @@ function displayPhoto() {
                 return a.category.name.includes("Hotels & restaurants");
             } else if (filterMethod === "all") {
                 return a.category.name.includes("Objets") + a.category.name.includes("Appartements") + a.category.name.includes("Hotels & restaurants")
-                }
-            })
-            .map((works) =>
-            
+            }
+        })
+        .map((works) =>
+
             `
             <div class="gallery">
             <figure>
@@ -38,23 +39,27 @@ function displayPhoto() {
             </figure>
             </div>
             `
-    )
-            .join("")  
-        }
-        
+        )
+        .join("")
+}
+
 // --------------------------------------------------------
 // ********* Clique affichage photos par séléction ***** //
-    
-        btnSort.forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-                filterMethod = e.target.id;
-                displayPhoto()
-            })
-            
+
+btnSort.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        filterMethod = e.target.id;
+        btnSort.forEach(btn => {
+            btn.classList.remove("active")
         })
+            btn.classList.add("active")
+        displayPhoto()
+    })
+
+})
 
 // -----------------------------------------------------------
 // ********* Fonction getWorks jouée au chargement ***** //
- window.addEventListener("load", getWorks); 
-                
-                
+window.addEventListener("load", getWorks);
+
+

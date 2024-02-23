@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	scroll-behavior: smooth;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -33,6 +34,9 @@ body {
 }
 ol, ul {
 	list-style: none;
+}
+a{
+	text-decoration: none;
 }
 blockquote, q {
 	quotes: none;
@@ -134,13 +138,37 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px	
 }
-.gallery {
-	
-}
 
 .gallery img {
 	width: 100%;
 
+}
+#filter{
+	display: flex;
+	justify-content: center;
+}
+.button{
+	width: 55%;
+	display: flex;
+	justify-content: space-between;
+}
+.button .btnSort{
+	font-family: 'Syne';
+	font-weight: 700;
+	color:rgb(57,117,105);
+	min-width: 100px;
+	background-color: rgb(255,254,248);
+	padding: 10px;
+	text-align: center;
+	border-radius: 60px ;
+	border:1px solid #1D6154;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.button .btnSort.active{
+	background-color: #1D6154;
+	color: #ffffff;
 }
 #contact {
 	width: 50%;

@@ -1,0 +1,33 @@
+
+#logIn {
+	width: 50%;
+    margin:200px auto;
+}
+#logIn > * {
+	text-align: center;
+
+}
+#logIn h2{
+	margin-bottom: 20px;
+}
+#logIn form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#logIn input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#logIn label {
+	margin: 2em 0 1em 0;
+}
+
+#error-message{
+	color: red;
+	
+}
