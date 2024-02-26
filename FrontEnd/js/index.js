@@ -2,7 +2,7 @@ const photoSophie = document.getElementById("portfolio")
 const btnSort = document.querySelectorAll(".btnSort")
 let photo = [];
 let filterMethod = "all"
-
+const photos = document.querySelector(".photos")
 
 // -------------------------------------------------------
 // ******* Récupération des données ******** //
@@ -12,23 +12,25 @@ async function getWorks() {
         .then((data) => photo = data);
     console.log(photo);
     displayPhoto()
+    displayPhotoModal() 
 }
 // -----------------------------------------------------------
 // ********** Affichage des photos avec filtres ************ //
 function displayPhoto() {
     photoSophie.innerHTML = photo
-        
-        .filter((a) => {
-            if (filterMethod === "objets") {
-                return a.category.name.includes("Objets");
-            } else if (filterMethod === "appart") {
-                return a.category.name.includes("Appartements");
-            } else if (filterMethod === "hr") {
-                return a.category.name.includes("Hotels & restaurants");
-            } else if (filterMethod === "all") {
-                return a.category.name.includes("Objets") + a.category.name.includes("Appartements") + a.category.name.includes("Hotels & restaurants")
-            }
-        })
+      
+        // .filter((a) => {
+        //     if (filterMethod === "objets") {
+        //         return a.category.name.includes("Objets");
+        //     } else if (filterMethod === "appart") {
+        //         return a.category.name.includes("Appartements");
+        //     } else if (filterMethod === "hr") {
+        //         return a.category.name.includes("Hotels & restaurants");
+        //     } else if (filterMethod === "all") {
+        //         return a.category.name.includes("Objets") + a.category.name.includes("Appartements") + a.category.name.includes("Hotels & restaurants")
+        //     }
+        // })
+
         .map((works) =>
 
             `
@@ -61,5 +63,40 @@ btnSort.forEach((btn) => {
 // -----------------------------------------------------------
 // ********* Fonction getWorks jouée au chargement ***** //
 window.addEventListener("load", getWorks);
+
+
+// ******** Affichage au clique de la modal ***** //
+const displayModal = document.getElementById("buttonModify").addEventListener("click", ()=>{
+    const modalOverlay = document.querySelector(".modalOverlay")
+    modalOverlay.classList.add("active")
+})
+
+    
+
+// ********* Affichage des photos avec la modal ******* //
+function displayPhotoModal() {
+    photos.innerHTML = photo   
+        .filter((a) => {
+            if (filterMethod === "objets") {
+                return a.category.name.includes("Objets");
+            } else if (filterMethod === "appart") {
+                return a.category.name.includes("Appartements");
+            } else if (filterMethod === "hr") {
+                return a.category.name.includes("Hotels & restaurants");
+            } else if (filterMethod === "all") {
+                return a.category.name.includes("Objets") + a.category.name.includes("Appartements") + a.category.name.includes("Hotels & restaurants")
+            }
+        })
+
+        .map((works) =>
+
+            `
+            <img src = ${works.imageUrl} alt"${works.title}">
+            
+            `
+        )
+        .join("")
+}
+
 
 

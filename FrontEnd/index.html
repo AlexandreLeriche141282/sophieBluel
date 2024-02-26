@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -35,9 +36,22 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+	<div class="modalOverlay">
+		<div class="modalContent">
+			<h2>Galerie photos</h2>
+			<div class="photos"></div>
+			<div class="photoLine"></div>
+			<button>Ajouter une photo</button>
+		</div>
+	</div>
+	<div class="title">
+		<h2>Mes Projets</h2>
+		<button id="buttonModify">
+		<i class="fa-regular fa-pen-to-square"></i>modifier	
+		</button>
+		
+	</div>
 	
-	<h2>Mes Projets</h2>
-	<!-- <i class="fa-regular fa-pen-to-square">modifier</i> -->
 	<section id="filter">
 		<div class="button">
 			<button class="btnSort active" id="all">Tous</button>
@@ -72,5 +86,6 @@
 	</nav>
 </footer>
 <script src="./js/index.js"></script>
+<script src="./js/login.js"></script>
 </body>
 </html>

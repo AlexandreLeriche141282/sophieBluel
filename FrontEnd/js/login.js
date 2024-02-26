@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	const form = document.querySelector('form');
 	const errorMessage = document.getElementById('error-message');
 	const loginLink = document.querySelector('#nav-login');
+	const filterButton = document.getElementById("filter");
+	const buttonModify = document.getElementById("buttonModify")
+	
 
 	// Vérifier si le token est présent dans le localStorage
 	const token = sessionStorage.getItem('token');
@@ -9,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (token) {
 	//***** Si token login = logout ******//
 		loginLink.textContent = 'logout';
+	// **** enlever boutons filtres ** //
+		filterButton.style.display = "none";
+		buttonModify.style.visibility = "visible";
 	}
 
 	form.addEventListener('submit', async function(event) {
@@ -46,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			// Rediriger vers une autre page ou effectuer d'autres actions
 			window.location.href = '../index.html';
+			
+			
 		} catch (error) {
             // console.error(error);
             // Affichage du message d'erreur
@@ -58,6 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	loginLink.addEventListener('click', function() {
 		if (token) {
 			sessionStorage.removeItem('token');
+			
 		}
 	});
 });
+
+// **** Creation d'une modale **** //
+buttonModify.addEventListener("click", () => {
+	
+})
