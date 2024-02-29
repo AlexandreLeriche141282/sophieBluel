@@ -249,24 +249,22 @@ display: flex !important;
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 110;
+    /* z-index: 110; */
     background: rgba(0,0,0,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     display: none;
 }
-.active{
+.activeModal{
 	display: flex !important;
 }
 
 
 .modalOverlay .modalContent{
-	/* box-sizing: border-box; */
 	border-radius: 10px;
 	background: white;
 	padding: 20px;
-	/* width: 90%; */
 	position: absolute;
 	height: 688px;
 	width: 630px;
@@ -289,11 +287,29 @@ display: flex !important;
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	position: relative;
 }
 .modalOverlay .modalContent .photos img{
 width: 75px;
 height: 100px;
 margin: 10px 0;
+
+}
+
+ i.fa-solid.fa-trash-can{
+	color: white;
+	background: black;
+	font-size: 10px;
+	width: 17px;
+	height: 17px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2px;
+	position: absolute;
+	right: -10px;
+	top: 15px;
+	cursor: pointer;	
 }
 
 .modalOverlay .modalContent .photoLine{
@@ -316,4 +332,12 @@ margin: 10px 0;
 	letter-spacing: 1px;
 	cursor: pointer;
 	margin: 40px 0;
+}
+
+.modalContent span{
+	position: absolute;
+	top: 35px;
+	right: 35px;
+	font-size: 24px;
+	cursor: pointer;
 }
