@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	const errorMessage = document.getElementById('error-message');
 	const loginLink = document.querySelector('#nav-login');
 	const filterButton = document.getElementById("filter");
-	const buttonModify = document.getElementById("buttonModify")
+	
 	
 
-	// Vérifier si le token est présent dans le localStorage
+	// Vérifier si le token est présent dans le sessionStorage
 	const token = sessionStorage.getItem('token');
 
 	if (token) {
@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		buttonModify.style.visibility = "visible";
 	}
 
+
+	// **** Formulaire de connexion ***** //
 	form.addEventListener('submit', async function(event) {
 		event.preventDefault();
 
@@ -43,9 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			const data = await response.json();
 			const token = data.token;
 
-			// Stocker le token dans le localStorage
+			// Stocker le token dans le sessionStorage
 			sessionStorage.setItem('token', token);
-			console.log('Token:', token);
+			console.log('token:', token);
 
 			// Changer le texte du lien en "logout" après la connexion réussie
 			loginLink.textContent = 'logout';
@@ -71,7 +73,3 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
-// **** Creation d'une modale **** //
-buttonModify.addEventListener("click", () => {
-	
-})

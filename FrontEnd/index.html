@@ -38,15 +38,33 @@
 	</section>
 	<div class="modalOverlay">
 		<div class="modalContent">
-			<h2>Galerie photos</h2>
+			<h2 id="titleAddPhoto">Galerie photos</h2>
 			<div class="photos"></div>
+			<div class="addPhoto">
+				<div class="addPhotoContainer">
+					<img src="#" alt="">
+					<i class="fa-regular fa-image"></i>
+					<label for="file">+ Ajouter photo</label>
+					<input type="file" id="file" name="image">
+					<p>jpg, png : 4 mo max</p>
+				</div>
+			</div>
+			<form id="form">
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title">
+				<label for="category">Catégorie</label>
+				<select name="category" id="category"></select>
+				<div class="photoLine2"></div>
+				<button class="buttonValid">Valider</button>
+			</form>
 			<div class="photoLine"></div>
-			<button>Ajouter une photo</button>
+			<button id="buttonAddPhoto" >Ajouter une photo</button>
 			<span id="modalClosed"><i class="fa-solid fa-xmark"></i></span>
+			<span id="arrowLeft"><i class="fa-solid fa-arrow-left"></i></span>
+			
 		</div>
-		
-		
 	</div>
+
 	<div class="title">
 		<h2>Mes Projets</h2>
 		<button id="buttonModify">
