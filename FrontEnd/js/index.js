@@ -4,9 +4,12 @@ let photo = [];
 let filterMethod = "all"
 const photos = document.querySelector(".photos")
 const formAddPhoto = document.getElementById("form")
+const errorMessageModale = document.getElementById('errorMessageModale');
 
 
 // -------------------------------------------------------
+
+
 // ******* Récupération des données ******** //
 async function getWorks() {
     await fetch("http://localhost:5678/api/works")
@@ -15,11 +18,13 @@ async function getWorks() {
     console.log(photo);
     displayPhoto()
     displayPhotoModal()
-   
+
 }
 // -----------------------------------------------------------
+
+
 // ********** Affichage des photos avec filtres ************ //
- function displayPhoto() {
+function displayPhoto() {
     photoSophie.innerHTML = photo
 
         .filter((a) => {
@@ -47,8 +52,8 @@ async function getWorks() {
         )
         .join("")
 }
-
 // --------------------------------------------------------
+
 // ********* Clique affichage photos par séléction ***** //
 
 btnSort.forEach((btn) => {
@@ -62,8 +67,9 @@ btnSort.forEach((btn) => {
     })
 
 })
-
 // -----------------------------------------------------------
+
+
 // ********* Fonction getWorks jouée au chargement ***** //
 window.addEventListener("load", getWorks);
 
@@ -82,7 +88,7 @@ const displayModal = document.getElementById("buttonModify").addEventListener("c
 
     })
 })
-
+// ----------------------------------------------------------------
 
 
 // ********* Affichage des photos avec la modale ******* //
@@ -98,7 +104,7 @@ function displayPhotoModal() {
             } else if (filterMethod === "all") {
                 return a.category.name.includes("Objets") + a.category.name.includes("Appartements") + a.category.name.includes("Hotels & restaurants")
             }
-            
+
         })
         .map((works) =>
 
@@ -111,20 +117,21 @@ function displayPhotoModal() {
 
         )
         .join("")
-        const formAddPhoto = document.getElementById("form")
-        formAddPhoto.style.display = "none";
-        const arrowLeft = document.getElementById("arrowLeft")
-        arrowLeft.style.display = "none";
-   
-   
+    const formAddPhoto = document.getElementById("form")
+    formAddPhoto.style.display = "none";
+    const arrowLeft = document.getElementById("arrowLeft")
+    arrowLeft.style.display = "none";
+    // --------------------------------------------------------------
+
+
     // ******** Suppression des photos ***** //
-function deletePhoto() {
+    function deletePhoto() {
         const garbageAll = document.querySelectorAll(".fa-trash-can")
         garbageAll.forEach(garbage => {
             garbage.addEventListener("click", (event) => {
 
                 const id = event.target.dataset.id;
-            
+
                 console.log(id);
                 const init = {
                     method: "DELETE",
@@ -135,31 +142,31 @@ function deletePhoto() {
 
                     },
                 }
-                fetch("http://localhost:5678/api/works/" +id,init)
+                fetch("http://localhost:5678/api/works/" + id, init)
                     .then((response) => {
                         if (!response.ok) {
                             console.log("delete error");
                         }
                         return response
-                    } )
-                    
+                    })
+
                     .then((data) => {
-                        console.log("delete ok:",data);
+                        console.log("delete ok:", data);
                         getWorks()
                         displayPhoto()
                     })
-                
-                
+
+
             })
         })
         const addPhoto = document.querySelector(".addPhoto")
         addPhoto.style.display = "none";
-    
+
     }
     deletePhoto()
-    
-}
 
+}
+// -------------------------------------------------------------------
 
 
 
@@ -171,25 +178,26 @@ const buttonAddPhoto = document.getElementById("buttonAddPhoto").addEventListene
     titleAddPhoto.textContent = "Ajout photo";
     const buttonValid = document.querySelector("form .buttonValid")
     buttonValid.style.margin = "30px auto 0";
-    
+
     const arrowLeft = document.getElementById("arrowLeft")
     arrowLeft.style.display = "flex";
     formAddPhoto.style.display = "flex";
     const addPhoto = document.querySelector(".addPhoto")
-    addPhoto.style.display = "flex";   
+    addPhoto.style.display = "flex";
     photos.style.display = "none";
     const buttonAddPhoto = document.getElementById("buttonAddPhoto")
     buttonAddPhoto.style.visibility = "hidden";
     const photoLine2 = document.querySelector(".photoLine2")
     photoLine2.style.display = "flex";
 })
+// ------------------------------------------------------------------------
 
 
 
 // *** Retour galerie *** //
 arrowLeft.addEventListener("click", () => {
     const arrowLeft = document.getElementById("arrowLeft")
-    arrowLeft.style.display = "none";   
+    arrowLeft.style.display = "none";
     const titleAddPhoto = document.getElementById("titleAddPhoto")
     titleAddPhoto.textContent = "Galerie photos";
     formAddPhoto.style.display = "none";
@@ -201,7 +209,8 @@ arrowLeft.addEventListener("click", () => {
     const photoLine = document.querySelector(".photoLine")
     photoLine.style.display = "flex";
 })
-    
+// --------------------------------------------------------------
+
 
 // *** Prev Image *** //
 
@@ -220,17 +229,17 @@ inputFile.addEventListener("change", () => {
         reader.onload = function (e) {
             previewImg.src = e.target.result
             previewImg.style.display = "flex"
-            inputFile.style.display ="none"
-            labelFile.style.display ="none"
-            iconFile.style.display ="none"
-            pFile.style.display ="none"
+            inputFile.style.visibility = "hidden"
+            labelFile.style.visibility = "hidden"
+            iconFile.style.visibility = "hidden"
+            pFile.style.visibility = "hidden"
         }
         reader.readAsDataURL(file);
     }
 })
 
 
-// **** Post , ajouter photo *** //
+
 const titleForm = document.getElementById("title")
 const categoryForm = document.getElementById("category")
 
@@ -239,20 +248,19 @@ const categoryForm = document.getElementById("category")
 async function displayphotoModales() {
     const select = document.querySelector(".modalContent select");
     const categoryForm = await fetchCategories();
-    
+
     categoryForm.forEach(category => {
 
         const option = document.createElement("option")
         option.value = category.id
         option.textContent = category.name
         select.appendChild(option)
-        
     });
 }
- displayphotoModales() 
+displayphotoModales()
 
 
- async function fetchCategories() {
+async function fetchCategories() {
     try {
         const response = await fetch('http://localhost:5678/api/categories');
         if (!response.ok) {
@@ -265,36 +273,81 @@ async function displayphotoModales() {
         throw error;
     }
 }
+// ---------------------------------------------------------
 
+
+// **** Post , ajouter nouvelle photo **** //
 function sendPhoto() {
-    formAddPhoto.addEventListener("submit",  (e) => {
-    e.preventDefault()
-    const formData = new FormData
-    formData.append("image", inputFile.files[0]);
-  	formData.append("title", titleForm.value);
-  	formData.append("category", categoryForm.value);
-    fetch('http://localhost:5678/api/works', {
-  			method: "POST",
-  			headers: {
-                    'Authorization': "Bearer " + sessionStorage.getItem('token'),
-                    
-                    
-  			},
-  			body:formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            getWorks()
-            // displayPhotoModal()
-            console.log(inputFile.files);
-            console.log(titleForm);
-            console.log(categoryForm);
-            console.log(data);
-            console.log("voici la photo ajoutée", data);
-            
+    formAddPhoto.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const formData = new FormData
+        formData.append("image", inputFile.files[0]);
+        formData.append("title", titleForm.value);
+        formData.append("category", categoryForm.value);
+        fetch('http://localhost:5678/api/works', {
+            method: "POST",
+            headers: {
+                'Authorization': "Bearer " + sessionStorage.getItem('token'),
+
+
+            },
+            body: formData,
         })
+            .then(response => response.json())
+            .then(data => {
+                getWorks()
+                console.log(data);
+                console.log("voici la photo ajoutée", data);
+
+            })
+        const modalOverlay = document.querySelector(".modalOverlay")
+        modalOverlay.classList.remove("activeModal")
+        form.reset();
         
     })
-    
+
 }
 sendPhoto()
+// -------------------------------------------------------------
+
+// Vérification du formulaire si tout les champs sont remplis//
+function verificationForm() {
+    const buttonValid = document.querySelector("form .buttonValid")
+    form.addEventListener("input", () => {
+        if (title.value != "" && category.value != "" && inputFile.value!="") {
+            buttonValid.style.backgroundColor = "rgb(57,117,105)"
+            buttonValid.disabled = false;
+            
+        }
+        else {
+            // (title.value === "" && category.value === "" && image.value === "")
+            buttonValid.style.backgroundColor = "rgb(167,167,167)"
+            buttonValid.disabled = true;
+        }
+        
+    })
+}
+verificationForm()
+// --------------------------------------------------------------------
+
+
+
+// Retour sur les projets après ajout d'images //
+const buttonValid = document.querySelector("form .buttonValid").addEventListener("click", () => {
+    const titleAddPhoto = document.getElementById("titleAddPhoto")
+    titleAddPhoto.textContent = "Galerie photos";
+    formAddPhoto.style.display = "none";
+    const buttonAddPhoto = document.getElementById("buttonAddPhoto")
+    buttonAddPhoto.style.visibility = "visible";
+    const addPhoto = document.querySelector(".addPhoto")
+    addPhoto.style.display = "none";
+    photos.style.display = "grid";
+    const photoLine = document.querySelector(".photoLine")
+    photoLine.style.display = "flex";
+    previewImg.style.display = "none"
+    inputFile.style.visibility = "visible"
+    labelFile.style.visibility = "visible"
+    iconFile.style.visibility = "visible"
+    pFile.style.visibility = "visible"
+    
+})

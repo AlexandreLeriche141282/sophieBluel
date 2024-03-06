@@ -40,22 +40,25 @@
 		<div class="modalContent">
 			<h2 id="titleAddPhoto">Galerie photos</h2>
 			<div class="photos"></div>
-			<div class="addPhoto">
-				<div class="addPhotoContainer">
-					<img src="#" alt="">
-					<i class="fa-regular fa-image"></i>
-					<label for="file">+ Ajouter photo</label>
-					<input type="file" id="file" name="image">
-					<p>jpg, png : 4 mo max</p>
-				</div>
-			</div>
 			<form id="form">
+				<div class="addPhoto">
+					<div class="addPhotoContainer">
+						<img src="#" alt="">
+						<i class="fa-regular fa-image"></i>
+						<label for="file">+ Ajouter photo</label>
+						<input type="file" id="file" name="image">
+						<p>jpg, png : 4 mo max</p>
+					</div>
+				</div>
+				<p id="errorMessageModale" hidden>
+					Veuillez ajouter un titre
+				</p>
 				<label for="title">Titre</label>
-				<input type="text" name="title" id="title">
+				<input type="text" name="title" id="title" required="required">
 				<label for="category">Catégorie</label>
 				<select name="category" id="category"></select>
 				<div class="photoLine2"></div>
-				<button class="buttonValid">Valider</button>
+				<button class="buttonValid" disabled>Valider</button>
 			</form>
 			<div class="photoLine"></div>
 			<button id="buttonAddPhoto" >Ajouter une photo</button>
