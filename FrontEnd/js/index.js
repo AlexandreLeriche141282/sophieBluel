@@ -80,10 +80,12 @@ const displayModal = document.getElementById("buttonModify").addEventListener("c
     modalOverlay.classList.add("activeModal")
     const modalClosed = document.getElementById("modalClosed").addEventListener("click", () => {
         modalOverlay.classList.remove("activeModal")
+        form.reset();
     })
     modalOverlay.addEventListener("click", (e) => {
         if (e.target.className == "modalOverlay activeModal") {
             modalOverlay.classList.remove("activeModal")
+            form.reset();
         }
 
     })
@@ -245,7 +247,7 @@ const categoryForm = document.getElementById("category")
 
 
 // *** Récupération des catégories *** //
-async function displayphotoModales() {
+async function recoveryOfCategories() {
     const select = document.querySelector(".modalContent select");
     const categoryForm = await fetchCategories();
 
@@ -257,7 +259,7 @@ async function displayphotoModales() {
         select.appendChild(option)
     });
 }
-displayphotoModales()
+recoveryOfCategories()
 
 
 async function fetchCategories() {
@@ -303,7 +305,7 @@ function sendPhoto() {
         const modalOverlay = document.querySelector(".modalOverlay")
         modalOverlay.classList.remove("activeModal")
         form.reset();
-        
+        errorMessageModale.removeAttribute('hidden');
     })
 
 }
@@ -320,9 +322,9 @@ function verificationForm() {
             
         }
         else {
-            // (title.value === "" && category.value === "" && image.value === "")
             buttonValid.style.backgroundColor = "rgb(167,167,167)"
             buttonValid.disabled = true;
+            
         }
         
     })
@@ -349,5 +351,4 @@ const buttonValid = document.querySelector("form .buttonValid").addEventListener
     labelFile.style.visibility = "visible"
     iconFile.style.visibility = "visible"
     pFile.style.visibility = "visible"
-    
 })
