@@ -71,7 +71,33 @@ btnSort.forEach((btn) => {
 
 
 // ********* Fonction getWorks jouée au chargement ***** //
-window.addEventListener("load", getWorks);
+window.addEventListener("load", () => {
+    getWorks();
+    const loginLink = document.querySelector('#nav-login');
+	const filterButton = document.getElementById("filter");
+	
+	
+
+	// Vérifier si le token est présent dans le sessionStorage
+	const token = sessionStorage.getItem('token');
+
+	if (token) {
+	//***** Si token login = logout ******//
+		loginLink.textContent = 'logout';
+	// **** enlever boutons filtres ** //
+		filterButton.style.display = "none";
+        buttonModify.style.visibility = "visible";
+        // Changer le texte du lien en "logout" après la connexion réussie
+			loginLink.textContent = 'logout';
+    }
+    // Gérer la déconnexion lorsque l'utilisateur clique sur "logout"
+	loginLink.addEventListener('click', function() {
+		if (token) {
+			sessionStorage.removeItem('token');
+			
+		}
+	});
+});
 
 
 // ******** Affichage au clique de la modale / Fermeture modale ***** //
@@ -180,7 +206,6 @@ const buttonAddPhoto = document.getElementById("buttonAddPhoto").addEventListene
     titleAddPhoto.textContent = "Ajout photo";
     const buttonValid = document.querySelector("form .buttonValid")
     buttonValid.style.margin = "30px auto 0";
-
     const arrowLeft = document.getElementById("arrowLeft")
     arrowLeft.style.display = "flex";
     formAddPhoto.style.display = "flex";
@@ -305,7 +330,6 @@ function sendPhoto() {
         const modalOverlay = document.querySelector(".modalOverlay")
         modalOverlay.classList.remove("activeModal")
         form.reset();
-        errorMessageModale.removeAttribute('hidden');
     })
 
 }

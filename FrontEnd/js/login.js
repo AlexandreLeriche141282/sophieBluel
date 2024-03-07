@@ -1,27 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
 	const form = document.querySelector('form');
 	const errorMessage = document.getElementById('error-message');
-	const loginLink = document.querySelector('#nav-login');
-	const filterButton = document.getElementById("filter");
 	
-	
-
-	// Vérifier si le token est présent dans le sessionStorage
-	const token = sessionStorage.getItem('token');
-
-	if (token) {
-	//***** Si token login = logout ******//
-		loginLink.textContent = 'logout';
-	// **** enlever boutons filtres ** //
-		filterButton.style.display = "none";
-		buttonModify.style.visibility = "visible";
-	}
 
 
 	// **** Formulaire de connexion ***** //
 	form.addEventListener('submit', async function(event) {
 		event.preventDefault();
-
+		console.log(event);
 		const email = document.getElementById('email').value;
 		const password = document.getElementById('password').value;
 
@@ -49,8 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			sessionStorage.setItem('token', token);
 			console.log('token:', token);
 
-			// Changer le texte du lien en "logout" après la connexion réussie
-			loginLink.textContent = 'logout';
+			
 
 			// Rediriger vers une autre page ou effectuer d'autres actions
 			window.location.href = '../index.html';
@@ -64,12 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
-	// Gérer la déconnexion lorsque l'utilisateur clique sur "logout"
-	loginLink.addEventListener('click', function() {
-		if (token) {
-			sessionStorage.removeItem('token');
-			
-		}
-	});
+	
 });
 
